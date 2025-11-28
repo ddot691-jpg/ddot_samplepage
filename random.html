@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>인터넷활용 실습 템플릿</title>
+    <title>랜덤 뽑기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,6 +21,8 @@
     </nav>
     <main class="container">
         <section>
+            <h2 style="text-align: center;">식사 랜덤 뽑기</h2>
+            <hr>
             <script>
                 let inputString = prompt("식사 랜덤 뽑기", "짜장면, 짬뽕, 볶음밥");
 
@@ -29,12 +31,13 @@
                 }
                 else {
                     let items = inputString.split(',');
+                    document.write("입력한 메뉴: ", items, "<br>");
                     let index = Math.floor(Math.random() * items.length);
 
                     let choice = items[index];
                     choice = choice.trim();
 
-                    document.write(choice);
+                    document.write("선정된 메뉴: <b>", choice, "</b>");
                 }
             </script>
 

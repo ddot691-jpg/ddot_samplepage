@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>댓글 추가삭제</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #eee;
+            border: 1px solid #999;
+            border-radius: 5px;
+            color: rgb(92, 92, 92);
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            padding: 10px;
+        }
+        li {
+            color: rgb(92, 92, 92);
+            list-style: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #eee;
+        }
+        li:nth-child(even) {
+            background-color: #ddd;
+        }
+        li:hover {
+            background-color: #ffdddd;
+        }
+
+    </style>
+</head>
+
+<body onload="addComment()">
+    <header>
+        <h1>이름: 권태영</h1>
+        <p class="subtitle">kwon tae young</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <main class="container">
+        <section>
+            <h2 style="text-align: center;">댓글 추가 삭제</h2>
+            <hr>
+            <h3>댓글 목록</h3>
+            <button onclick="addComment()">댓글 추가</button>
+            <i style="color: #999;"><sub>클릭하여 삭제</sub></i>
+            <ul id="commentList"></ul>
+        </section>
+        <script>
+            function addComment() {
+                var inputData = prompt("댓글을 입력하세요", "오늘 수업 너무 재밌어요!");
+                if (inputData == null) {
+                    alert("댓글이 입력되지 않았습니다");
+                }
+                else {
+                    var parent = document.getElementById("commentList");
+                    var newLi = document.createElement("li");
+                    newLi.innerHTML = inputData;
+
+                    newLi.onclick = function () {
+                        var p = this.parentElement;
+                        p.removeChild(this);
+                    };
+
+                    parent.appendChild(newLi);
+                }
+            }
+        </script>
+    </main>
+    <footer>
+        <small>&copy; <span id="year"></span>권태영</small>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
