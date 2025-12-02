@@ -37,19 +37,30 @@
         }
     </style>
     <script>
+        const colors = ["red", "yellow", "green", "blue", "purple", "black"];
+        let Index = 0;
         function changeColr() {
             var obj = document.getElementById("target");
-            obj.style.color = "red";
+            obj.style.color = colors[Index];
+            Index = (Index + 1) % colors.length;
         }
 
-        function changeSize() {
+        function toggleSize() {
             var obj = document.getElementById("target");
-            obj.style.fontSize = "32px";
+            if (obj.style.fontSize == "20px") {
+                obj.style.fontSize = "32px";
+            } else {
+                obj.style.fontSize = "20px";
+            }
         }
 
-        function changeBg() {
+        function toggleBg() {
             var obj = document.getElementById("target");
-            obj.style.background = "yellow";
+            if (obj.style.background == "none") {
+                obj.style.background = "yellow";
+            } else {
+                obj.style.background = "none";
+            }
         }
 
         function toggleVisibility() {
@@ -81,8 +92,8 @@
             <p id="target">이 문장의 스타일을 바꿔보세요!</p>
 
             <button onclick="changeColr()">글자색 변경</button>
-            <button onclick="changeSize()">크게 보기</button>
-            <button onclick="changeBg()">배경 강조</button>
+            <button onclick="toggleSize()">크게 보기</button>
+            <button onclick="toggleBg()">배경 강조</button>
             <button onclick="toggleVisibility()">숨기기/보이기</button>
         </section>
     </main>
