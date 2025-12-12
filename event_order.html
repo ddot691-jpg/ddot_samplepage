@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스마트 피자 주문서</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #menu_box {
+            padding: 15px 20px;
+            border: 2px solid #ccc;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        #order_box{
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        input {
+            width: auto;
+            padding: 1px;
+        }
+        label, input:hover{
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        function recalc() {
+            var total = 0;
+            var checks = document.getElementsByClassName("menu -check");
+            var qtys = document.getElementsByClassName("menu -qty");
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].checked) {
+                    var price = parseInt(checks[i].value);
+                    var quantity = parseInt(qtys[i].value);
+                    total += price * quantity;
+                }
+            }
+            document.getElementById("total").value = total;
+        }
+
+        function validate(e) {
+            var total = parseInt(document.getElementById("total").value);
+            var add = document.getElementById("address");
+            
+            if (total == 0) {
+                alert("메뉴를 선택해주세요.");
+                e.preventDefault();
+                return false;
+            }
+            if (add.value == "") {
+                alert("배달 주소를 입력해주세요.");
+                setTimeout(function(){
+                    add.focus();
+                }, 10)
+                e.preventDefault();
+                return false;
+            }
+            alert("주문 완료! 총액: " + total + "원");
+            e.preventDefault();
+            return false;
+        }
+
+        function cheakAdd(){
+            var add = document.getElementById("address");
+            if (add.value == "") {
+                alert("배달 주소를 입력해주세요."); //chrome에서 무한루프
+                setTimeout(function(){ //지연시간
+                    add.focus();
+                }, 10)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>이름: 권태영</h1>
+        <p class="subtitle">kwon tae young</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <main class="container">
+        <section>
+            <h2 style="text-align: center;">피자 주문서</h2>
+            <hr>
+            <form  onsubmit="validate(event)">
+                <div id="menu_box">
+                    <h3>[메뉴 선택]</h3><hr>
+                    <div>
+                        <label><input type="checkbox" class="menu -check" value="15000" onchange="recalc()"> 콤비네이션 피자 (15,000원) </label>
+                        <input type="number" class="menu -qty" value="1" min="1" onchange="recalc()" onkeyup="recalc()" style="width: 40px;"> 개
+                    </div>
+                    <div>
+                        <label><input type="checkbox" class="menu -check" value="12000" onchange="recalc()"> 페퍼로니 피자 (12,000원) </label>
+                        <input type="number" class="menu -qty" value="1" min="1" onchange="recalc()" onkeyup="recalc()" style="width: 40px;"> 개
+                    </div>
+                    <div>
+                        <label><input type="checkbox" class="menu -check" value="2000" onchange="recalc()"> 치즈 추가 (2,000원) </label>
+                        <input type="number" class="menu -qty" value="1" min="1" onchange="recalc()" onkeyup="recalc()" style="width: 40px;"> 개
+                    </div>
+                    <div>
+                        <label><input type="checkbox" class="menu -check" value="1500" onchange="recalc()"> 콜라 (1,500) </label>
+                        <input type="number" class="menu -qty" value="1" min="1" onchange="recalc()" onkeyup="recalc()" style="width: 40px;"> 개
+                    </div>
+                </div>
+                <div id="order_box">
+                    <label>배달 주소: <input type="text" id="address" size="60" placeholder="주소를 입력하세요" onblur="cheakAdd()"></label><br><br>
+                    <label>주문 합계: <input type="text" id="total" value="0" readonly> 원</label><br><br><br>
+
+                    <input type="submit" value=" 주문하기 ">&nbsp;
+                    <input type="reset" value=" 초기화 " onclick="setTimeout(recalc, 0)">
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <small>&copy; <span id="year"></span>권태영</small>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

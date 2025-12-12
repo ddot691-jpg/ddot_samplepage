@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>키보드 자동차</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #boundary {
+            position: relative;
+            border: 2px solid red;
+            width: 850px;
+            height: 500px;
+            margin: auto;
+        }
+
+        #car {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            width: 80px;
+            height: 40px;
+            background: violet;
+            color: white;
+            text-align: center;
+            font-size: larger;
+        }
+    </style>
+    <script>
+        var x = 50;
+        var y = 50;
+        var step = 10;
+
+        window.onload = function () {
+            var car = document.getElementById("car");
+            var boundary = document.getElementById("boundary");
+
+            window.onkeydown = function (e) {
+                var nextX = x;
+                var nextY = y;
+
+                switch(e.keyCode) {
+                    case 37: nextX -= step; break;
+                    case 38: nextY -= step; break;
+                    case 39: nextX += step; break;
+                    case 40: nextY += step; break;
+                }
+
+                if (nextX >= 0 && nextX <= boundary.clientWidth - car.offsetWidth) {
+                    x = nextX;
+                }
+                if (nextY >= 0 && nextY <= boundary.clientHeight - car.offsetHeight) {
+                    y = nextY;
+                }
+
+                car.style.left = x + "px";
+                car.style.top = y + "px";
+            };
+        };
+    </script>
+</head>
+
+<body style="overflow: hidden;">
+    <header>
+        <h1>이름: 권태영</h1>
+        <p class="subtitle">kwon tae young</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <main class="container">
+        <section>
+            <h2 style="text-align: center;">키보드 자동차</h2>
+            <hr>
+            키보드 방향키(←,↑,→,↓)를 이용해 자동차를 이동시킵니다.<br><br>
+            <div id="boundary">
+                <div id="car"><b>car</b></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <small>&copy; <span id="year"></span>권태영</small>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
